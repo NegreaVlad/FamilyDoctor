@@ -7,6 +7,7 @@ import FamilyDoctor.repository.Repository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +93,14 @@ public class DoctorControllerTest {
     public void testAddConsultation8() throws ConsultationException, PatientException {
         List<String> meds = new ArrayList<String>();
         meds.add("paracetamol");
+        repository.addPatient(new Patient("1970809135797", "Numel", "Apoca"));
+        controller.addConsultation(142, "1970809135797", null, meds, "23.03.2018");
+    }
+
+    // Null meds
+    @Test(expected = ConsultationException.class)
+    public void testAddConsultation9() throws ConsultationException, PatientException {
+        List<String> meds = null;
         repository.addPatient(new Patient("1970809135797", "Numel", "Apoca"));
         controller.addConsultation(142, "1970809135797", null, meds, "23.03.2018");
     }
