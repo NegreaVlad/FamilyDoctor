@@ -101,18 +101,10 @@ public class DoctorController {
 		else {
 			throw new ConsultationException("invalid arguments");
 		}
-
 	}
 
 	public List<Patient> getPatientsWithDisease(String disease) throws PatientException {
 
 		return rep.getPatientsWithDisease(disease);
 	}
-
-	/*
-	 * For debugging purposes public void printList() { for (int i = 0; i <
-	 * PatientList.size(); i++) {
-	 * System.out.println(PatientList.get(i).toString()); } }
-	 */
-
 }
