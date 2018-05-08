@@ -2,18 +2,21 @@ package FamilyDoctor.repository;
 
 import FamilyDoctor.exceptions.PatientException;
 import FamilyDoctor.model.Patient;
-import junit.framework.TestCase;
+import org.junit.Before;
 import org.junit.Test;
 
-public class RepositoryTest extends TestCase {
+import static org.junit.Assert.assertEquals;
 
-    Repository repository;
+public class RepositoryTest {
 
+    private Repository repository;
+
+    @Before
     public void setUp() throws Exception {
-        super.setUp();
         repository = new Repository();
     }
 
+    @Test
     public void testAddPatient() throws Exception {
         assertEquals(0, repository.getPatientList().size());
         repository.addPatient(new Patient("1970311184746", "The name", "Venus"));
@@ -87,11 +90,6 @@ public class RepositoryTest extends TestCase {
     public void testAddConsultation() throws Exception {
 
         assertEquals(3, 3);
-
-    }
-
-    public void testGetPatientsWithDisease() throws Exception {
-        assertEquals(32, 32);
 
     }
 

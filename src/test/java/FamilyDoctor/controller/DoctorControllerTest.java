@@ -13,10 +13,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class DoctorControllerTest {
-    Repository repository;
-    DoctorController controller;
-    String consultationsFile = "FileConsultations.txt";
-    String patientsFile = "FilePatients.txt";
+    private Repository repository;
+    private DoctorController controller;
+    private String consultationsFile = "FileConsultations.txt";
+    private String patientsFile = "FilePatients.txt";
 
     @Before
     public void setUp() throws Exception {
