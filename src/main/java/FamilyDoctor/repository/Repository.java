@@ -1,38 +1,38 @@
 package FamilyDoctor.repository;
 
 
+import FamilyDoctor.exceptions.PatientException;
+import FamilyDoctor.model.Consultation;
+import FamilyDoctor.model.Patient;
+import FamilyDoctor.validator.PatientValidation;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import FamilyDoctor.exceptions.PatientException;
-import FamilyDoctor.model.*;
-import FamilyDoctor.validator.PatientValidation;
-
 
 public class Repository {
 
-	private String patientsFile; // list of patients
-	private String consultationsFile; // list of consultation
+    private String patientsFile; // list of patients
+    private String consultationsFile; // list of consultation
 
-	private ArrayList<Consultation> consultationList;
-	private ArrayList<Patient> patientList;
+    private ArrayList<Consultation> consultationList;
+    private ArrayList<Patient> patientList;
 
-	public Repository(){
+    public Repository() {
         consultationList = new ArrayList<Consultation>();
         patientList = new ArrayList<Patient>();
     }
 
-	public Repository(String patients, String consultations)
-	{
-		this.patientsFile = patients;
-		this.consultationsFile = consultations;
+    public Repository(String patients, String consultations) {
+        this.patientsFile = patients;
+        this.consultationsFile = consultations;
 
-		consultationList = new ArrayList<Consultation>();
-		patientList = new ArrayList<Patient>();
-	}
+        consultationList = new ArrayList<Consultation>();
+        patientList = new ArrayList<Patient>();
+    }
 
-	/*	public void cleanFiles()
+    /*	public void cleanFiles()
         {
             FileWriter fw;
             try {
@@ -58,10 +58,9 @@ public class Repository {
             patientList = new ArrayList<Patient>();
         }
         */
-	public ArrayList<Patient> getPatientsFromFile() throws IOException
-	{
-		FileReader fr = new FileReader(patientsFile);
-		BufferedReader br = new BufferedReader(fr);
+    public ArrayList<Patient> getPatientsFromFile() throws IOException {
+        FileReader fr = new FileReader(patientsFile);
+        BufferedReader br = new BufferedReader(fr);
 //		while ((in.readLine()) != null) {
 //			n++;
 //		}
@@ -71,23 +70,22 @@ public class Repository {
 //		String s = new String();
 //		int i = 0;
 //		in = new BufferedReader(new FileReader(patients));
-		String line = null;
-		while ((line = br.readLine()) != null) {
-			String[] result = line.split(",");
-			Patient p = new Patient();
-			p.setName(result[0]);
-			p.setSSN(result[1]);
-			p.setAddress(result[2]);
-			patientList.add(p);
-		}
-		br.close();
-		return patientList;
-	}
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            String[] result = line.split(",");
+            Patient p = new Patient();
+            p.setName(result[0]);
+            p.setSSN(result[1]);
+            p.setAddress(result[2]);
+            patientList.add(p);
+        }
+        br.close();
+        return patientList;
+    }
 
-	public ArrayList<Consultation> getConsultationsFromFile() throws IOException
-	{
-		FileReader fr = new FileReader(patientsFile);
-		BufferedReader br = new BufferedReader(fr);
+    public ArrayList<Consultation> getConsultationsFromFile() throws IOException {
+        FileReader fr = new FileReader(patientsFile);
+        BufferedReader br = new BufferedReader(fr);
 //		while ((in.readLine()) != null) {
 //			n++;
 //		}
@@ -97,27 +95,26 @@ public class Repository {
 //		String s = new String();
 //		int i = 0;
 //		in = new BufferedReader(new FileReader(consultations));
-		String line = null;
-		while ((line = br.readLine()) != null) {
-			String[] result = line.split(",");
-			Consultation consultation = new Consultation();
-			consultation.setConsID(Integer.getInteger(result[0]));
-			consultation.setPatientSSN(result[1]);
-			consultation.setDiagnostic(result[2]);
-			String[] r = result[3].split(" + ");
-			ArrayList<String> res = new ArrayList<String>();
-			for (int i = 0; i<r.length; i++)
-				res.add(r[i]);
-			consultation.setMeds(res);
-			consultation.setConsultation_date(result[4]);
-			consultationList.add(consultation);
-		}
-		br.close();
-		return consultationList;
-	}
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            String[] result = line.split(",");
+            Consultation consultation = new Consultation();
+            consultation.setConsID(Integer.getInteger(result[0]));
+            consultation.setPatientSSN(result[1]);
+            consultation.setDiagnostic(result[2]);
+            String[] r = result[3].split(" + ");
+            ArrayList<String> res = new ArrayList<String>();
+            for (int i = 0; i < r.length; i++)
+                res.add(r[i]);
+            consultation.setMeds(res);
+            consultation.setConsultation_date(result[4]);
+            consultationList.add(consultation);
+        }
+        br.close();
+        return consultationList;
+    }
 
-	public List<Patient> getPatientList()
-	{
+    public List<Patient> getPatientList() {
 //		List<Patient> lp = new ArrayList<Patient>();
 //		try {
 //			String[] tokens = getPatientsFromFile();
@@ -138,11 +135,10 @@ public class Repository {
 //		}
 //
 //		return lp;
-		return patientList;
-	}
+        return patientList;
+    }
 
-	public List<Consultation> getConsultationList()
-	{
+    public List<Consultation> getConsultationList() {
 //		List<Consultation> lp = new ArrayList<Consultation>();
 //		try {
 //			String[] tokens = getConsultationsFromFile();
@@ -172,11 +168,11 @@ public class Repository {
 //		}
 //
 //		return lp;
-		return consultationList;
-	}
+        return consultationList;
+    }
 
-	public void savePatientToFile(Patient p) throws IOException		// save to file
-	{
+    public void savePatientToFile(Patient p) throws IOException        // save to file
+    {
 //		int n=0;
 //		BufferedReader in = new BufferedReader(new FileReader(patients));
 //		while((in.readLine())!=null)
@@ -198,101 +194,100 @@ public class Repository {
 //			out.println(sl[i]);
 //		out.println(p.toString());
 //		out.close();
-		FileWriter fileWriter = new FileWriter(patientsFile,true);
-		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        FileWriter fileWriter = new FileWriter(patientsFile, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-		bufferedWriter.write(p.toString());
-		bufferedWriter.newLine();
-		bufferedWriter.flush();
-		bufferedWriter.close();
-	}
+        bufferedWriter.write(p.toString());
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+        bufferedWriter.close();
+    }
 
-	public void saveConsultationToFile(Consultation c) throws IOException		// save to file
-	{
-		FileWriter fr = new FileWriter(consultationsFile, true);
-		BufferedWriter br = new BufferedWriter(fr);
-		br.write(c.toString());
-		br.newLine();
-		br.close();
-	}
+    public void saveConsultationToFile(Consultation c) throws IOException        // save to file
+    {
+        FileWriter fr = new FileWriter(consultationsFile, true);
+        BufferedWriter br = new BufferedWriter(fr);
+        br.write(c.toString());
+        br.newLine();
+        br.close();
+    }
 
-	public void addPatient(Patient p) throws PatientException {
+    public void addPatient(Patient p) throws PatientException {
 
-            try {
-                PatientValidation.nameValidate(p.getName());
-                PatientValidation.ssnValidate(p.getSSN());
-                PatientValidation.addressValidate(p.getAddress());
+        try {
+            PatientValidation.nameValidate(p.getName());
+            PatientValidation.ssnValidate(p.getSSN());
+            PatientValidation.addressValidate(p.getAddress());
 
-            } catch (PatientException e) {
-                throw new PatientException(e.toString());
+        } catch (PatientException e) {
+            throw new PatientException(e.toString());
+        }
+
+        patientList.add(p);
+    }
+
+    public void addConsultation(Consultation c) {
+        consultationList.add(c);
+    }
+
+    public List<Patient> getPatientsWithDisease(String disease) throws PatientException {
+        List<Consultation> c = this.getConsultationList();
+        List<Patient> p = new ArrayList<Patient>();
+        if (disease != null) {
+            if (disease.length() == 0) {
+                throw new PatientException("Empty disease provided");
+            }
+            int chk = 1;
+
+            for (int i = 0; i < c.size(); i++) {
+                if (c.get(i).getDiagnostic().toLowerCase()
+                        .contains(disease.toLowerCase())) // so that it is case insensitive
+                {
+                    for (int j = 0; j < p.size(); j++) // verify patient was  not already added
+                    {
+                        if (p.get(j).getSSN().equals(c.get(i).getPatientSSN())) {
+                            chk = p.get(j).getConsNum();
+                        }
+                    }
+
+                    if (chk == 1) {
+                        p.add(this.getPatientList().get(
+                                this.getPatientBySSN(c.get(i).getPatientSSN()))); // get Patient by SSN
+                    }
+                    chk = 1;
+                }
             }
 
-		patientList.add(p);
-	}
+            Patient paux = new Patient();
 
-	public void addConsultation(Consultation c){
-		consultationList.add(c);
-	}
+            for (int i = 0; i < p.size(); i++)
+                for (int j = i + 1; j < p.size() - 1; j++)
+                    if (p.get(j - 1).getConsNum() < p.get(j).getConsNum()) {
+                        paux = p.get(j - 1);
+                        p.set(j - 1, p.get(j));
+                        p.set(j, paux);
+                    }
+        } else {
+            throw new PatientException("Null disease parameter provided");
+        }
+        return p;
+    }
 
-	public List<Patient> getPatientsWithDisease(String disease) throws PatientException{
-		List<Consultation> c = this.getConsultationList();
-		List<Patient> p = new ArrayList<Patient>();
-		if (disease != null) {
-			if (disease.length() == 0) {
-				throw new PatientException("Empty disease provided");
-			}
-			int chk = 1;
+    private int getPatientBySSN(String SSN) {
+        for (int i = 0; i < patientList.size(); i++) {
+            if (patientList.get(i).getSSN().equals(SSN))
+                return i;
+        }
+        return -1;
+    }
 
-			for (int i = 0; i < c.size(); i++) {
-				if (c.get(i).getDiagnostic().toLowerCase()
-						.contains(disease.toLowerCase())) // so that it is case insensitive
-				{
-					for (int j = 0; j < p.size(); j++) // verify patient was  not already added
-					{
-						if (p.get(j).getSSN().equals(c.get(i).getPatientSSN())) {
-							chk = p.get(j).getConsNum();
-						}
-					}
+    private int getConsByID(int ID) {
+        for (int i = 0; i < consultationList.size(); i++) {
+            if (consultationList.get(i).getConsID() == ID) {
+                return i;
+            }
+        }
 
-					if (chk == 1) {
-						p.add(this.getPatientList().get(
-								this.getPatientBySSN(c.get(i).getPatientSSN()))); // get Patient by SSN
-					}
-					chk = 1;
-				}
-			}
-
-			Patient paux = new Patient();
-
-			for (int i = 0; i < p.size(); i++)
-				for (int j = i + 1; j < p.size() - 1; j++)
-					if (p.get(j - 1).getConsNum() < p.get(j).getConsNum()) {
-						paux = p.get(j - 1);
-						p.set(j - 1, p.get(j));
-						p.set(j, paux);
-					}
-		}
-		else {
-			throw new PatientException("Null disease parameter provided");
-		}
-		return p;
-	}
-
-	private int getPatientBySSN(String SSN) {
-		for (int i = 0; i < patientList.size(); i++) {
-			if (patientList.get(i).getSSN().equals(SSN))
-				return i;
-		}
-		return -1;
-	}
-
-	private int getConsByID(int ID) {
-		for (int i = 0; i < consultationList.size(); i++) {
-			if (consultationList.get(i).getConsID() == ID) {
-				return i ;
-			}
-		}
-
-		return -1;
-	}
+        return -1;
+    }
 }
